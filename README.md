@@ -48,10 +48,8 @@ The project also explores how Progressive Web App technologies can be used to cr
 * Real-time rescue organization integration
 * User authentication
 * Database-backed reports
-* Live location sharing
 * Rescue status tracking
 * Push notifications
-* Image uploads for reported cases
 * Admin dashboard
 * Rescue volunteer coordination
 
