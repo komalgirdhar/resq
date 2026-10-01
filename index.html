@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#F7F7F5">
+    <title>RESQ | Report. Connect. Rescue.</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Forminit SDK -->
+    <script src="https://forminit.com/sdk/v1/forminit.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="new-icon.png">
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo-area">
+                <span class="brand-logo">RESQ</span>
+                <span class="tagline">Report. Connect. Rescue.</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <nav class="nav-links" id="nav-links">
+                <a href="#home">Home</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#report-section" class="btn btn-primary">Report an Animal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>An animal needs help? <span class="emphasis">Report it. Help starts here.</span></h1>
+                    <p>See an injured, sick, trapped or abandoned animal? Send a rescue report with a photo, details and location in under a minute.</p>
+                    <div class="hero-actions">
+                        <a href="#report-section" class="btn btn-primary">
+                            🚨 Report an Animal
+                        </a>
+                        <a href="#how-it-works" class="btn btn-secondary">
+                            How RESQ Works <i data-lucide="arrow-down" style="width: 16px;"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- High quality placeholder image -->
+                    <img src="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&q=80&w=1200" alt="Rescued dog looking at camera">
+                    <div class="hero-image-overlay"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Three steps. One purpose.</h2>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <span class="step-number">01 — SPOT</span>
+                        <h3>See an animal that needs help.</h3>
+                        <p>Observe the situation from a safe distance. Note their condition and exact location without putting yourself or the animal in danger.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-number">02 — REPORT</span>
+                        <h3>Share a photo, situation and location.</h3>
+                        <p>Use our simple form below. Upload a picture, select the problem, and use your phone's GPS to give us exact coordinates.</p>
+                    </div>
+                    <div class="step-card">
+                        <span class="step-number">03 — RESCUE</span>
+                        <h3>Information reaches the rescue team.</h3>
+                        <p>Your detailed report is instantly routed to the relevant civic or NGO rescue teams who will use the provided maps link to reach the spot.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsive Image  -->
+        <section class="image-break">
+            <div class="container">
+                <img src="resq.jpeg" alt="Rescued animal" class="responsive-image">
+            </div>
+        </section>
+
+        <section id="report-section" class="report-section">
+            <div class="container">
+                <div class="report-card">
+                    
+                    <div id="form-content" class="form-content">
+                        <div class="report-header">
+                            <h2>Report an Animal</h2>
+                            <p>Every detail can help someone reach the animal.</p>
+                        </div>
+
+                        <form id="resq-form" enctype="multipart/form-data">
+                            <!-- 01 - ANIMAL PHOTO -->
+                            <div class="form-group">
+                                <label>Animal Photo *</label>
+                                <span class="label-desc">Take a photo or upload one from your device. Required.</span>
+                                
+                                <div class="photo-upload-container" id="photo-dropzone">
+                                    <div class="photo-upload-content" id="upload-prompt">
+                                        <i data-lucide="camera" class="photo-icon"></i>
+                                        <span style="font-family: var(--font-head); font-weight: 600; font-size: 1.1rem;">＋ Add Animal Photo</span>
+                                        <span style="color: var(--text-light); font-size: 0.9rem;">Tap to upload or capture</span>
+                                    </div>
+                                    <!-- capture="environment" prefers back camera on mobile -->
+                                    <input type="file" name="fi-file-animal_photo" id="photo-input" class="file-input" accept="image/*" capture="environment" required>
+                                </div>
+                                
+                                <div id="image-preview-container">
+                                    <img id="image-preview" src="" alt="Preview">
+                                    <button type="button" class="change-photo-btn" id="change-photo-btn">Change Photo</button>
+                                </div>
+                                <div class="error-msg" id="photo-error">Please provide a photo.</div>
+                            </div>
+
+                            <!-- 02 & 03 - SELECTS -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+                                <div class="form-group">
+                                    <label for="animal_type">What animal is it? *</label>
+                                    <select name="fi-select-animal_type" id="animal_type" required>
+                                        <option value="" disabled selected>Select an option</option>
+                                        <option value="Dog">Dog</option>
+                                        <option value="Cat">Cat</option>
+                                        <option value="Cow">Cow</option>
+                                        <option value="Bird">Bird</option>
+                                        <option value="Horse">Horse</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <div class="error-msg">Please select an animal type.</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="problem">What's wrong? *</label>
+                                    <select name="fi-select-problem" id="problem" required>
+                                        <option value="" disabled selected>Select an option</option>
+                                        <option value="Injured">Injured</option>
+                                        <option value="Road Accident">Road Accident</option>
+                                        <option value="Sick">Sick</option>
+                                        <option value="Trapped">Trapped</option>
+                                        <option value="Abandoned">Abandoned</option>
+                                        <option value="In Danger">In Danger</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <div class="error-msg">Please select the problem.</div>
+                                </div>
+                            </div>
+
+                            <!-- 04 - DESCRIPTION -->
+                            <div class="form-group">
+                                <label for="description">Describe the situation *</label>
+                                <textarea name="fi-text-description" id="description" placeholder="Tell us what happened and anything that may help the rescue team..." required></textarea>
+                                <div class="error-msg">Please provide a brief description.</div>
+                            </div>
+
+                            <!-- 05 - LOCATION -->
+                            <div class="form-group">
+                                <div class="location-card">
+                                    <label>📍 Animal Location *</label>
+                                    <span class="label-desc">We need accurate coordinates to reach the animal quickly.</span>
+                                    
+                                    <button type="button" class="btn btn-secondary" id="get-location-btn" style="width: 100%; margin-top: 8px;">
+                                        <i data-lucide="map-pin"></i> Use My Current Location
+                                    </button>
+                                    
+                                    <div id="location-status" class="location-status"></div>
+                                    <a href="#" id="maps-preview-link" target="_blank" class="maps-link-btn">Open Location in Google Maps ↗</a>
+                                    
+                                    <!-- Hidden fields populated by JS -->
+                                    <input type="hidden" name="fi-text-latitude" id="lat-input">
+                                    <input type="hidden" name="fi-text-longitude" id="lng-input">
+                                    <input type="hidden" name="fi-url-google_maps_url" id="maps-url-input">
+                                    <input type="hidden" id="location-provided" value="false">
+
+                                    <div id="manual-location-group">
+                                        <label for="manual_address" style="font-size: 0.95rem; margin-top: 16px;">Or enter address manually:</label>
+                                        <input type="text" name="fi-text-manual_address" id="manual_address" placeholder="e.g. Near City Mall Gate 2, Main Street">
+                                    </div>
+                                    <div class="error-msg" id="location-error">Please provide a location (GPS or manual address).</div>
+                                </div>
+                            </div>
+
+                            <!-- 06 - CONTACT -->
+                            <div class="form-group">
+                                <label for="phone">📞 Your Contact *</label>
+                                <span class="label-desc">The rescue team may contact you for additional information or directions.</span>
+                                
+                                <div style="display: flex; gap: 8px;">
+                                    <div style="background: var(--input-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; color: var(--text-light); font-weight: 600; display: flex; align-items: center; justify-content: center; user-select: none;">
+                                        +91
+                                    </div>
+                                    <input type="tel" name="fi-sender-phone" id="phone" placeholder="10-digit number" maxlength="10" required style="flex: 1;">
+                                </div>
+
+                                <div class="error-msg" id="phone-error">Please enter a valid 10-digit phone number.</div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">
+                                🚨 SEND RESCUE REPORT
+                            </button>
+                            <div class="error-msg" id="form-general-error" style="text-align: center; font-size: 1rem; margin-top: 16px;">
+                                Something went wrong. Your report could not be sent. Please check your connection and try again.
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Success State (Hidden by default) -->
+                    <div id="success-state" class="success-state">
+                        <i data-lucide="check-circle" class="success-icon"></i>
+                        <h3>✓ Rescue Report Sent</h3>
+                        <p>Thank you for taking a moment to help an animal in need.</p>
+                        
+                        <div class="ref-box" id="reference-number">
+                            RESQ-XXXX
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 32px;">This is your local reference number.</p>
+                        
+                        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                            <button type="button" class="btn btn-primary" id="report-another-btn">
+                                Report Another Animal
+                            </button>
+                            <a href="#home" class="btn btn-secondary">
+                                Back to Home
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="brand-logo">RESQ</div>
+                    <p>Helping people quickly report animals that need assistance. Designed for rapid response.</p>
+                </div>
+                <div class="footer-links">
+                    <h4 style="margin-bottom: 16px; font-size: 1.1rem;">Navigation</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#report-section">Report an Animal</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+               Built with purpose by komal girdhar ❤️
+            </div>
+        </div>
+    </footer>
+  <script src="script.js"></script>
+</body>
+</html>
